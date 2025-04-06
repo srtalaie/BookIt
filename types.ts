@@ -49,3 +49,15 @@ export interface NavItems {
   text: string;
   loc: string;
 }
+
+export interface UserFE {
+  user: {
+    user: Profile
+  }
+}
+
+export interface BooksFE {
+  books: {
+    books: Book[]
+  }
+}

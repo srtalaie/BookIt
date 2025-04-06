@@ -55,7 +55,7 @@ export const login = async (
     const { email, password } = req.body;
 
     // Find user
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).populate('bookCollection').exec();
     if (!user) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
@@ -78,6 +78,7 @@ export const login = async (
         id: user._id,
         email: user.email,
         name: user.name,
+        bookCollection: user.bookCollection,
       },
     });
   } catch (error) {

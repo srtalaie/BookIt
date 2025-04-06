@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Stack, Typography } from "@mui/material";
+import { Button, Card, CardActions, CardContent, CardMedia, Chip, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../../hooks/hooks";
@@ -68,7 +68,7 @@ const BookCard: React.FC<BookCardProps> = ({ id, title, author, summary, genre, 
         component="img"
         alt="placeholder"
         height="140"
-        image="https://source.unsplash.com/random/800x600/?book"
+        image="https://picsum.photos/400/300"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -86,7 +86,7 @@ const BookCard: React.FC<BookCardProps> = ({ id, title, author, summary, genre, 
         {genre.length > 0 ? (
           <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
             {genre.map((g) => (
-              <Button key={g} variant="outlined" size="small">{g}</Button>
+              <Chip key={g} variant="outlined" label={g} />
             ))}
           </Stack>
         ) : (<></>)}
@@ -97,10 +97,9 @@ const BookCard: React.FC<BookCardProps> = ({ id, title, author, summary, genre, 
         ) : (
           <Button size="small" color="success" onClick={handleAddBookToCollection}>Add to Collection</Button>
         )}
-        <Button size="small">Add to Collection</Button>
         {isOwner ? (
           <div>
-            <Button size="small"><Link to={`/edit-book/${id}`}></Link></Button>
+            <Button size="small" color="primary"><Link to={`/edit-book/${id}`}>Edit</Link></Button>
             <Button size="small" color="error" onClick={handleBookDelete}>Delete</Button>
           </div>
         ) : (<></>)}
