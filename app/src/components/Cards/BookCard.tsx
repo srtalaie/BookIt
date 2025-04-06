@@ -1,6 +1,8 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../../hooks/hooks";
+import { addABookToCollection, deleteBookThunk, removeABookFromCollection } from "../../api/reducers/bookCollReducer";
 
 interface BookCardProps {
   id: string;
@@ -11,10 +13,13 @@ interface BookCardProps {
   isbn: string;
   ownerId: string;
   loggedInUserId: string;
+  isInCollection?: boolean;
 }
 
-const BookCard: React.FC<BookCardProps> = ({ id, title, author, summary, genre, isbn, ownerId, loggedInUserId, }) => {
+const BookCard: React.FC<BookCardProps> = ({ id, title, author, summary, genre, isbn, ownerId, loggedInUserId, isInCollection }) => {
   const [isOwner, setIsOwner] = useState(false)
+
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     // Check if logged in user is owner of displayed book
@@ -26,8 +31,36 @@ const BookCard: React.FC<BookCardProps> = ({ id, title, author, summary, genre, 
   }, [ownerId, loggedInUserId])
 
   const handleBookDelete = async () => {
-    if () 
+    try {
+      await dispatch(deleteBookThunk(id))
+      alert('Book was deleted successfully')
+    } catch (error) {
+      console.error('Error deleting book:', error);
+      alert('Error deleting book. Please try again later.');
+    }
   }
+
+  const handleAddBookToCollection = async () => {
+    try {
+      await dispatch(addABookToCollection(id))
+      alert('Book added to collection successfully')
+    } catch (error) {
+      console.error('Error adding book to collection:', error);
+      alert('Error adding book to collection. Please try again later.');
+
+    }
+  }
+
+  const handleRemoveBookFromCollection = async () => {
+    try {
+      await dispatch(removeABookFromCollection(id))
+      alert('Book removed from collection successfully')
+    } catch (error) {
+      console.error('Error removing book from collection:', error);
+      alert('Error removing book from collection. Please try again later.');
+    }
+  }
+
 
   return (
     <Card key={id} sx={{ maxWidth: 345 }}>
@@ -59,11 +92,16 @@ const BookCard: React.FC<BookCardProps> = ({ id, title, author, summary, genre, 
         ) : (<></>)}
       </CardContent>
       <CardActions>
+        {isInCollection ? (
+          <Button size="small" color="error" onClick={handleRemoveBookFromCollection}>Remove from Collection</Button>
+        ) : (
+          <Button size="small" color="success" onClick={handleAddBookToCollection}>Add to Collection</Button>
+        )}
         <Button size="small">Add to Collection</Button>
         {isOwner ? (
           <div>
             <Button size="small"><Link to={`/edit-book/${id}`}></Link></Button>
-            <Button size="small">Delete</Button>
+            <Button size="small" color="error" onClick={handleBookDelete}>Delete</Button>
           </div>
         ) : (<></>)}
       </CardActions>

@@ -180,7 +180,7 @@ export const deleteBook = async (
         .json({ message: "You are not authorized to change this book's info" });
     }
 
-    // Check if book is in user's collection, if so remove it from their collection
+    // Remove book from all collections
     await User.findByIdAndUpdate(
       owner._id,
       { $pull: { bookCollection: book._id } },

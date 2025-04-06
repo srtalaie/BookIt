@@ -1,11 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Book, BookCollectionState, Profile } from "../../../../types";
 import { getProfile } from "../services/authService";
 import { addBookToCollection, removeBookFromCollection } from '../services/bookCollService';
+import { deleteABook } from "./bookReducer";
 
 const initialState: BookCollectionState = {
   bookCollection: []
 }
+
+export const deleteBookThunk = createAsyncThunk(
+  'deleteBook/removeBookFromCollection',
+  async (bookId: string, { dispatch }) => {
+    await dispatch(deleteABook(bookId));
+    return bookId;
+  }
+);
 
 const bookCollectionSlice = createSlice({
   name: 'bookCollection',
@@ -22,6 +31,12 @@ const bookCollectionSlice = createSlice({
         state.bookCollection = state.bookCollection.filter(b => b.id !== book);
       }
     }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(deleteBookThunk.fulfilled, (state, action: { payload: string }) => {
+      const bookId = action.payload;
+      state.bookCollection = state.bookCollection.filter(book => book.id !== bookId);
+    });
   }
 })
 
