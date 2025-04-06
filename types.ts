@@ -11,7 +11,7 @@ export interface RegisteringUser {
 }
 
 export interface Book {
-  id: string;
+  _id: string;
   isbn: string;
   title: string;
   author: string;

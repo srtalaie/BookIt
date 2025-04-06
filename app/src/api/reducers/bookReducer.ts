@@ -17,13 +17,13 @@ const bookSlice = createSlice({
       state.books.push(action.payload);
     },
     editBookInState: (state, action: { payload: Book }) => {
-      const index = state.books.findIndex(book => book.id === action.payload.id);
+      const index = state.books.findIndex(book => book._id === action.payload._id);
       if (index !== -1) {
         state.books[index] = action.payload;
       }
     },
     removeBookFromState: (state, action) => {
-      state.books = state.books.filter(book => book.id !== action.payload.id);
+      state.books = state.books.filter(book => book._id !== action.payload.id);
     }
   }
 })
