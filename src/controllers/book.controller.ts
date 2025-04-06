@@ -180,7 +180,14 @@ export const deleteBook = async (
         .json({ message: "You are not authorized to change this book's info" });
     }
 
-    await Book.findByIdAndDelete(req.params.bookId);
+    // Check if book is in user's collection, if so remove it from their collection
+    await User.findByIdAndUpdate(
+      owner._id,
+      { $pull: { bookCollection: book._id } },
+      { new: true },
+    ).exec();
+    // Delete book from db  
+    await Book.findByIdAndDelete(req.params.bookId).exec();
     res.status(202).json({ message: "Book was deleted successfully" });
   } catch (error) {
     next(error);
