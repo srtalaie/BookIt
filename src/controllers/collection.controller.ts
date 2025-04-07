@@ -19,7 +19,7 @@ export const addBookToCollection = async (
       req.user?.userId,
       { $addToSet: { bookCollection: bookId } },
       { new: true },
-    );
+    ).populate('bookCollection').exec();
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -52,7 +52,7 @@ export const removeBookFromCollection = async (
       req.user?.userId,
       { $pull: { bookCollection: bookId } },
       { new: true },
-    ).exec();
+    ).populate('bookCollection').exec();
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });

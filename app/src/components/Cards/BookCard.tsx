@@ -13,11 +13,12 @@ interface BookCardProps {
   isbn: string;
   ownerId: string;
   loggedInUserId: string;
-  isInCollection?: boolean;
+  isInCollectionCheck: boolean;
 }
 
-const BookCard: React.FC<BookCardProps> = ({ id, title, author, summary, genre, isbn, ownerId, loggedInUserId, isInCollection }) => {
+const BookCard: React.FC<BookCardProps> = ({ id, title, author, summary, genre, isbn, ownerId, loggedInUserId, isInCollectionCheck }) => {
   const [isOwner, setIsOwner] = useState(false)
+  const [isInCollection, setIsinCollection] = useState(isInCollectionCheck)
 
   const dispatch = useAppDispatch()
 
@@ -43,6 +44,7 @@ const BookCard: React.FC<BookCardProps> = ({ id, title, author, summary, genre, 
   const handleAddBookToCollection = async () => {
     try {
       await dispatch(addABookToCollection(id))
+      setIsinCollection(!isInCollection)
       alert('Book added to collection successfully')
     } catch (error) {
       console.error('Error adding book to collection:', error);
@@ -55,6 +57,7 @@ const BookCard: React.FC<BookCardProps> = ({ id, title, author, summary, genre, 
     try {
       await dispatch(removeABookFromCollection(id))
       alert('Book removed from collection successfully')
+      setIsinCollection(false)
     } catch (error) {
       console.error('Error removing book from collection:', error);
       alert('Error removing book from collection. Please try again later.');

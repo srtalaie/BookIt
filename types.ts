@@ -67,3 +67,9 @@ export interface BookFE {
     book: Book
   }
 }
+
+export interface BookCollectionFE {
+  bookCollection: {
+    bookCollection: string[]
+  }
+}
