@@ -1,6 +1,6 @@
 import { Grid, Link, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { connect, useSelector } from "react-redux"
 import { Book, UserFE } from "../../../types"
 import BookCard from "../components/Cards/BookCard"
 
@@ -55,4 +55,12 @@ const Home = () => {
   )
 }
 
-export default Home
+const mapStateToProps = (state: { books: Book[]; user: UserFE; bookCollection: { bookCollection: { _id: string }[] } }) => {
+  return {
+    books: state.books,
+    user: state.user,
+    bookCollection: state.bookCollection,
+  };
+};
+
+export default connect(mapStateToProps)(Home)

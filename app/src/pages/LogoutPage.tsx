@@ -1,7 +1,7 @@
 const LogoutPage = () => {
   return (
     <div>
-      <h1>You Have Been Successfully Logged Out</h1>
+      <h1>TODO:You Have Been Successfully Logged Out</h1>
     </div>
   )
 }
