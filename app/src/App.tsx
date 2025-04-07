@@ -11,6 +11,7 @@ import CreateBookPage from "./pages/CreateBookPage";
 import EditBookPage from "./pages/EditBookPage";
 import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
+import LogoutPage from "./pages/LogoutPage";
 import RegistrationPage from "./pages/RegistrationPage";
 
 const loggedInNavItems = [{ text: 'Home', loc: '/' }, { text: 'Logout', loc: '/logout' }, { text: 'Create Book', loc: '/createbook' }];
@@ -44,6 +45,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/logout" element={<LogoutPage />} />
         <Route path="/createbook" element={<CreateBookPage />} />
         <Route path="/editbook/:bookId" element={<EditBookPage />} />
       </Routes>
