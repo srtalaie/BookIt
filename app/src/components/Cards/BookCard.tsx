@@ -102,7 +102,7 @@ const BookCard: React.FC<BookCardProps> = ({ id, title, author, summary, genre, 
         )}
         {isOwner ? (
           <div>
-            <Button size="small" color="primary"><Link to={`/edit-book/${id}`}>Edit</Link></Button>
+            <Button size="small" color="primary"><Link to={`/editbook/${id}`}>Edit</Link></Button>
             <Button size="small" color="error" onClick={handleBookDelete}>Delete</Button>
           </div>
         ) : (<></>)}

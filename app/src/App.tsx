@@ -8,6 +8,7 @@ import { fetchBookCollection } from "./api/reducers/bookCollReducer";
 import { fetchBooks } from "./api/reducers/bookReducer";
 import NavBar from "./components/NavBars/NavBar";
 import CreateBookPage from "./pages/CreateBookPage";
+import EditBookPage from "./pages/EditBookPage";
 import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
@@ -44,6 +45,7 @@ function App() {
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/createbook" element={<CreateBookPage />} />
+        <Route path="/editbook/:bookId" element={<EditBookPage />} />
       </Routes>
     </>
 
