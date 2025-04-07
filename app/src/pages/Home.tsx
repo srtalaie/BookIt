@@ -1,7 +1,7 @@
 import { Grid, Link, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { Book, BookCollectionFE, UserFE } from "../../../types"
+import { Book, UserFE } from "../../../types"
 import BookCard from "../components/Cards/BookCard"
 
 const Home = () => {
@@ -9,7 +9,7 @@ const Home = () => {
 
   const books: Book[] = useSelector((state: { books: { books: Book[] } }) => state.books.books)
   const user = useSelector((state: { user: UserFE }) => state.user.user?.user)
-  const collection = useSelector((state: BookCollectionFE) => (state.bookCollection?.bookCollection))
+  const collection = useSelector((state: { bookCollection: { bookCollection: { _id: string }[] } }) => (state.bookCollection?.bookCollection))
 
   useEffect(() => {
     const loggedInUser = window.localStorage.getItem('loggedInUser')
@@ -28,9 +28,7 @@ const Home = () => {
         <Grid container component="div" direction={"row"} justifyContent="center" alignItems="center" spacing={2}>
           {books.length > 0 ? (
             books.map((book: Book) => {
-              const isInCollection: boolean = collection.some((id) => id === book._id.toString())
-              console.log(collection);
-
+              const isInCollection = collection.some((bookInColl) => bookInColl._id.toString() === book._id.toString())
               return (
                 <BookCard
                   key={book._id}

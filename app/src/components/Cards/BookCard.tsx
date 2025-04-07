@@ -57,7 +57,7 @@ const BookCard: React.FC<BookCardProps> = ({ id, title, author, summary, genre, 
     try {
       await dispatch(removeABookFromCollection(id))
       alert('Book removed from collection successfully')
-      setIsinCollection(false)
+      setIsinCollection(!isInCollection)
     } catch (error) {
       console.error('Error removing book from collection:', error);
       alert('Error removing book from collection. Please try again later.');
