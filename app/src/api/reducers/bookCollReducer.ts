@@ -26,16 +26,16 @@ const bookCollectionSlice = createSlice({
     updateBookCollection: (state, action) => {
       const { book, actionType } = action.payload;
       if (actionType === 'add') {
-        state.bookCollection.push(book);
+        state.bookCollection = book.bookCollection;
       } else if (actionType === 'remove') {
-        state.bookCollection = state.bookCollection.filter(b => b.id !== book);
+        state.bookCollection = state.bookCollection.filter(b => b._id !== book._id);
       }
     }
   },
   extraReducers: (builder) => {
     builder.addCase(deleteBookThunk.fulfilled, (state, action: { payload: string }) => {
       const bookId = action.payload;
-      state.bookCollection = state.bookCollection.filter(book => book.id !== bookId);
+      state.bookCollection = state.bookCollection.filter(book => book._id !== bookId);
     });
   }
 })

@@ -61,3 +61,9 @@ export interface BooksFE {
     books: Book[]
   }
 }
+
+export interface BookFE {
+  book: {
+    book: Book
+  }
+}

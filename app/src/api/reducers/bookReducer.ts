@@ -45,8 +45,9 @@ export const fetchBooks = () => {
 export const addABook = (book: BookCreate) => {
   return async (dispatch: (action: { type: string; payload: Book }) => void) => {
     try {
-      const newBook: Book = await createBook(book);
-      dispatch(setBooks(newBook));
+      const newBook = await createBook(book);
+      const bookToBeAdded = newBook.book;
+      dispatch(addBookToState(bookToBeAdded));
     } catch (error: unknown) {
       console.error('Error creating a book:', error);
       throw error;

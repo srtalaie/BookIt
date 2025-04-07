@@ -1,6 +1,8 @@
 import { Container } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+import { UserFE } from "../../types";
 import { useAppDispatch } from "../hooks/hooks";
 import { fetchBookCollection } from "./api/reducers/bookCollReducer";
 import { fetchBooks } from "./api/reducers/bookReducer";
@@ -17,18 +19,19 @@ function App() {
   const [userCheck, setUserCheck] = useState(false);
 
   const dispatch = useAppDispatch();
+  const user = useSelector((state: UserFE) => state.user.user)
 
   useEffect(() => {
     // Check if user is logged in, if not change navbar to show only login and register options
     const loggedInUserJSON = window.localStorage.getItem('loggedInUser')
-    if (loggedInUserJSON) {
+    if (loggedInUserJSON && user) {
       setUserCheck(true)
     }
-  }, [])
+  }, [userCheck, user])
 
   useEffect(() => {
-    dispatch(fetchBooks());
-    dispatch(fetchBookCollection());
+    dispatch(fetchBooks())
+    dispatch(fetchBookCollection())
   }, [dispatch]);
 
   return (
