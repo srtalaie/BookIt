@@ -34,7 +34,7 @@ export const createBook = async (
     res.status(201).json({
       message: "Book was successfully created",
       book: {
-        id: book._id,
+        _id: book._id,
         title: book.title,
         author: book.author,
         genre: book.genre,
