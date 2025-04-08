@@ -144,7 +144,7 @@ export const editBook = async (
     res.status(200).json({
       message: "Successfully edited the book",
       book: {
-        id: savedBook._id,
+        _id: savedBook._id,
         title: savedBook.title,
         author: savedBook.author,
         genre: savedBook.genre,
