@@ -1,0 +1,4 @@
+- Figure out how to connect componet to redux store using connect() in Home.tsx
+  - May need to connect in App.tsx
+- Redux state needs to update on book being removed from collection
+- Redux state needs to update on book being edited
