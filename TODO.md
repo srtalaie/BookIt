@@ -2,3 +2,5 @@
   - May need to connect in App.tsx
 - Redux state needs to update on book being removed from collection
 - Redux state needs to update on book being edited
+- Logout function/Logout.tsx page
+- Use render to host site
