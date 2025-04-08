@@ -1,5 +1,6 @@
 - Figure out how to connect componet to redux store using connect() in Home.tsx
   - May need to connect in App.tsx
+  - [Start Here](https://react-redux.js.org/tutorials/connect)
 - Redux state needs to update on book being removed from collection
 - Redux state needs to update on book being edited
 - Logout function/Logout.tsx page
